@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archie's Community - Roblox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS sebelumnya tetap sama */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #AABFFF;
+            --secondary: #AABFFF;
+            --accent: #FFB6C1;
+            --dark: #f0f4ff;
+            --light: #ffffff;
+            --text: #5a5a5a;
+            --text-light: #5a5a5a;
+            --card-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fbff, #e6eeff);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            background: var(--primary);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(170, 191, 255, 0.3);
+            box-shadow: 0 2px 10px rgba(170, 191, 255, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #f0f4ff;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(170, 191, 255, 0.2), transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--text);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(170, 191, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(170, 191, 255, 0.4);
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 80px 0;
+            background: rgba(170, 191, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .event-card {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(170, 191, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(170, 191, 255, 0.3);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .event-image {
+            flex: 1;
+            min-height: 300px;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+
+        .event-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .event-description {
+            color: var(--text);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Games Section - DITAMBAH MARGIN */
+        .games-section {
+            padding: 100px 0 80px 0; /* Padding atas ditambah */
+            margin-top: 20px; /* Margin atas ditambah */
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(170, 191, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(170, 191, 255, 0.3);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(170, 191, 255, 0.3);
+        }
+
+        .game-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), #c2d1ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .game-card:hover .game-image img {
+            transform: scale(1.05);
+        }
+
+        .game-image .icon-fallback {
+            position: absolute;
+            font-size: 3rem;
+            color: white;
+            opacity: 0.7;
+        }
+
+        .game-content {
+            padding: 20px;
+        }
+
+        .game-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .game-description {
+            color: var(--text);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .play-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .play-button:hover {
+            background: #8fa9ff;
+            transform: scale(1.02);
+        }
+
+        /* Community Section */
+        .community-section {
+            padding: 80px 0;
+            background: rgba(170, 191, 255, 0.1);
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 20px;
+        }
+
+        .community-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            border-top: 1px solid rgba(170, 191, 255, 0.3);
+            margin-top: 60px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .footer-logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(170, 191, 255, 0.2);
+            border-radius: 50%;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(170, 191, 255, 0.4);
+        }
+
+        .social-link.roblox {
+            background: rgba(170, 191, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            color: var(--text);
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .event-card {
+                flex-direction: column;
+            }
+
+            .event-image {
+                min-height: 200px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .community-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Tombol Mini Games Baru - POSISI GAMBAR DIPERBAIKI MENJADI -55px */
+        .mini-games-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px; /* Ditambah agar lebih berjarak */
+            position: relative;
+        }
+
+        .mini-games-character {
+            width: 140px;
+            height: 90px;
+            position: relative;
+            margin-bottom: 35px; /* DIPERBAIKI: menjadi -80px sesuai permintaan */
+            z-index: 1;
+        }
+
+        .mini-games-character img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: scale(1.8);
+        }
+
+        .mini-games-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: #4251A7;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(66, 81, 167, 0.3);
+            width: fit-content;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mini-games-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(66, 81, 167, 0.4);
+            background: #3a4790;
+        }
+
+        .mini-games-icon {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="https://tr.rbxcdn.com/180DAY-3289cd85173a33b1b8ec9d54b6327701/150/150/Image/Webp/noFilter" alt="Archie's Community Logo">
+                    </div>
+                    <div class="logo-text">Archie's Community</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#events">Acara</a></li>
+                        <li><a href="#games">Game</a></li>
+                        <li><a href="#community">Komunitas</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Selamat Datang di Archie's Community</h1>
+            <p>Komunitas Roblox terbaik dengan berbagai pengalaman gaming yang menarik dan seru. Bergabunglah dengan kami dan jelajahi dunia virtual yang menakjubkan!</p>
+            <a href="#games" class="cta-button">Jelajahi Game Kami</a>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section" id="events">
+        <div class="container">
+            <h2 class="section-title">Acara Spesial</h2>
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://tr.rbxcdn.com/180DAY-01b4749727992bf184364fe07c14a4d3/768/432/Image/Webp/noFilter" alt="Winter Event - Open the Shops">
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">Winter Event - Open the Shops</h3>
+                    <p class="event-description">Bergabung event dan bersenang-senang dengan tema musim dingin. Dapatkan item eksklusif dan nikmati suasana liburan yang menyenangkan!</p>
+                    <a href="https://ro.blox.com/Ebh5?pid=share&is_retargeting=true&af_dp=roblox%3A%2F%2Fnavigation%2Fevent_details%3Feventid%3D7665066270659445309&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fevents%2F7665066270659445309" class="cta-button" target="_blank">Bergabung Acara</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section - DITAMBAH SPASI -->
+    <section class="games-section" id="games">
+        <div class="container">
+            <h2 class="section-title">Game Populer Kami</h2>
+            
+            <!-- Tombol Mini Games -->
+            <div class="mini-games-container">
+                <div class="mini-games-character">
+                    <img src="https://tr.rbxcdn.com/180DAY-a947457bf16046846bb57e13ca44c2a4/150/150/Decal/Webp/noFilter" alt="Karakter Kucing Mengintip">
+                </div>
+                <a href="https://archiescommunity.github.io/minigames/" class="mini-games-button" target="_blank">
+                    <div class="mini-games-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    Jelajahi Mini Games
+                </a>
+            </div>
+            
+            <div class="games-grid">
+                <!-- Game 1: Open The Shops -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://tr.rbxcdn.com/180DAY-8a8d730e426d0088a169d3f2743c324e/768/432/Image/Webp/noFilter" alt="Open The Shops" onerror="this.style.display='none'">
+                        <div class="icon-fallback"><i class="fas fa-store"></i></div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Open The Shops</h3>
+                        <p class="game-description">Buka toko-toko menarik dan kelola bisnis virtual Anda sendiri. Temukan item langka dan bangun kerajaan bisnis!</p>
+                        <button class="play-button" data-game="81141612161161">Main Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Game 2: SOS Tower -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://tr.rbxcdn.com/180DAY-a6714726fb1cb20f7b92c20fee84a4f4/768/432/Image/Webp/noFilter" alt="SOS Tower" onerror="this.style.display='none'">
+                        <div class="icon-fallback"><i class="fas fa-music"></i></div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">SOS Tower (the sza album)</h3>
+                        <p class="game-description">Naiki menara musik bertema album SZA. Tantang kecepatan dan refleksmu di tiap lantai, hadapi rintangan unik, dan rasakan sensasi menara yang memacu adrenalin!</p>
+                        <button class="play-button" data-game="87395736266019">Main Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Game 3: Blink Tower -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://tr.rbxcdn.com/180DAY-1c81b65ab12801c7ee3013c9c9cad210/768/432/Image/Webp/noFilter" alt="Blink Tower" onerror="this.style.display='none'">
+                        <div class="icon-fallback"><i class="fas fa-bolt"></i></div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Blink Tower</h3>
+                        <p class="game-description">Menaiki menara penuh tantangan. Tekan tombol blink untuk menghindari pandangan kabur dan ingatlah untuk selalu berkedip.</p>
+                        <button class="play-button" data-game="107185307296488">Main Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Game 4: Gunung Anyar -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://tr.rbxcdn.com/180DAY-9f3c82a0adddac194abff2f2ef02b21d/768/432/Image/Webp/noFilter" alt="Gunung Anyar" onerror="this.style.display='none'">
+                        <div class="icon-fallback"><i class="fas fa-mountain"></i></div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Gunung Anyar</h3>
+                        <p class="game-description">Jelajahi gunung di Surabaya dengan pemandangan menakjubkan. Nikmati mud volcano di sore hari yang hangat dan suasana yang menenangkan!</p>
+                        <button class="play-button" data-game="108678322614676">Main Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Game 5: Cozy Tower -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://tr.rbxcdn.com/180DAY-0588033d300944594a669635885faca4/768/432/Image/Webp/noFilter" alt="Cozy Tower" onerror="this.style.display='none'">
+                        <div class="icon-fallback"><i class="fas fa-home"></i></div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Cozy Tower</h3>
+                        <p class="game-description">Menara hangat untuk bersantai bersama teman. Nikmati suasana lembut bertema biskuit dengan warna krem yang menenangkan.</p>
+                        <button class="play-button" data-game="91452808976578">Main Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Game 6: Do Not Play This - GAMBAR DIUBAH -->
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="https://tr.rbxcdn.com/180DAY-2f179369a41bac469a8d7d2141c942f4/768/432/Image/Webp/noFilter" alt="Do Not Play This" onerror="this.style.display='none'">
+                        <div class="icon-fallback"><i class="fas fa-exclamation-triangle"></i></div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Do Not Play This</h3>
+                        <p class="game-description">Game dengan tantangan tak terduga. Apakah Anda berani mencobanya? Peringatan: tidak untuk orang penakut!</p>
+                        <button class="play-button" data-game="134908525686498">Main Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section" id="community">
+        <div class="container">
+            <div class="community-content">
+                <h2 class="section-title">Bergabung dengan Komunitas</h2>
+                <p>Archie's Community adalah rumah bagi pemain Roblox dari seluruh dunia. Bergabunglah dengan kami untuk pengalaman gaming yang tak terlupakan!</p>
+                
+                <div class="community-stats">
+                    <div class="stat">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Anggota</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Game</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Tahun Aktif</div>
+                    </div>
+                </div>
+                
+                <a href="https://www.roblox.com/share/g/475357191" class="cta-button">Bergabung Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Tentang Kami</h2>
+                <p class="about-text">
+                    Archie's Community didirikan dengan tujuan untuk menciptakan lingkungan yang ramah dan menyenangkan bagi para pemain Roblox. 
+                    Kami berkomitmen untuk menyediakan pengalaman gaming yang berkualitas dengan berbagai game menarik, mulai dari game visual menawan hingga pengalaman menegangkan, yang terus dikembangkan.
+                </p>
+                <p class="about-text">
+                    Dengan fokus pada kreativitas dan inovasi, komunitas kami terus berkembang dengan anggota dari berbagai belahan dunia. 
+                    Bergabunglah dengan kami untuk menjadi bagian dari perjalanan yang menakjubkan di dunia Roblox!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">
+                    <img src="https://tr.rbxcdn.com/180DAY-512663ac5fb405ead2b999191d36cb67/150/150/Decal/Webp/noFilter" alt="Archie's Community Logo">
+                </div>
+                <div class="footer-logo-text">Archie's Community</div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.roblox.com/share?code=bdb974735dcdec43bae01d7919800a17&type=Profile&source=ProfileShare&stamp=1762967449953" class="social-link roblox" target="_blank" title="Roblox Profile">
+                    R
+                </a>
+                <a href="https://www.tiktok.com/@1aichi.be?_r=1&_t=ZS-91LJVYKY6S2" class="social-link" target="_blank" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="#" class="social-link" id="discord-link" title="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://www.instagram.com/arch_1ee?igsh=MTN1OWM1cjE3ZTh5bA==" class="social-link" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            
+            <p class="copyright">© 2025 Archie's Community. Semua hak dilindungi</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fungsi untuk membuka game Roblox
+        function playGame(placeId) {
+            // URL untuk membuka game di Roblox
+            const robloxUrl = `roblox://placeID=${placeId}`;
+            const webUrl = `https://www.roblox.com/games/start?placeId=${placeId}`;
+            
+            // Coba buka aplikasi Roblox
+            window.location.href = robloxUrl;
+            
+            // Fallback ke website Roblox jika aplikasi tidak tersedia
+            setTimeout(() => {
+                window.open(webUrl, '_blank');
+            }, 500);
+        }
+
+        // Tambahkan event listener ke semua tombol play
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const placeId = this.getAttribute('data-game');
+                playGame(placeId);
+            });
+        });
+
+        // Smooth scroll untuk navigasi
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Discord username copy
+        document.getElementById('discord-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText('arch_1ee').then(() => {
+                alert('Username Discord: arch_1ee telah disalin ke clipboard!');
+            });
+        });
+
+        // Animasi scroll untuk elemen
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Terapkan animasi pada elemen game card
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+
+        // Terapkan animasi pada event card
+        const eventCard = document.querySelector('.event-card');
+        if (eventCard) {
+            eventCard.style.opacity = '0';
+            eventCard.style.transform = 'translateY(20px)';
+            eventCard.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(eventCard);
+        }
+
+        // Preload gambar untuk performa lebih baik
+        window.addEventListener('load', function() {
+            const imageUrls = [
+                'https://tr.rbxcdn.com/180DAY-3289cd85173a33b1b8ec9d54b6327701/150/150/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-512663ac5fb405ead2b999191d36cb67/150/150/Decal/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-01b4749727992bf184364fe07c14a4d3/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-8a8d730e426d0088a169d3f2743c324e/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-a6714726fb1cb20f7b92c20fee84a4f4/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-1c81b65ab12801c7ee3013c9c9cad210/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-9f3c82a0adddac194abff2f2ef02b21d/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-0588033d300944594a669635885faca4/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-2f179369a41bac469a8d7d2141c942f4/768/432/Image/Webp/noFilter',
+                'https://tr.rbxcdn.com/180DAY-a947457bf16046846bb57e13ca44c2a4/150/150/Decal/Webp/noFilter'
+            ];
+
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        });
+    </script>
+</body>
+</html>
+
+ini yg benar
+jawab singkat, koreksi
